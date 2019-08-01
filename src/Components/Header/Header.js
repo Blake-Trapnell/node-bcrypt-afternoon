@@ -36,6 +36,9 @@ export default class Header extends Component {
     const {username,password,isAdmin} = this.state
     axios.post(`/auth/register`, {
       username, password, is_admin: isAdmin
+    }).then(res=> this.props.updateUser(res.data)).catch(err=>{
+      this.setState({ username: '', password: '' })
+      alert(err.response.request.response)
     })
   }
 
